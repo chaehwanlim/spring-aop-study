@@ -1,9 +1,9 @@
 package hello.aop.order.aop;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 
 @Slf4j
@@ -43,6 +43,26 @@ public class AspectV5Order {
             }
         }
 
+    }
+
+    @Before("hello.aop.order.aop.Pointcuts.serviceMethodsInOrderDomain()")
+    public void doBefore(JoinPoint joinPoint) {
+        log.info("[Before] {}", joinPoint.getSignature());
+    }
+
+    @AfterReturning(value = "hello.aop.order.aop.Pointcuts.serviceMethodsInOrderDomain()", returning = "result")
+    public void doAfterReturning(JoinPoint joinPoint, Object result) {
+        log.info("[AfterReturning] {}, return = {}", joinPoint.getSignature(), result);
+    }
+
+    @AfterThrowing(value = "hello.aop.order.aop.Pointcuts.serviceMethodsInOrderDomain()", throwing = "ex")
+    public void doAfterThrowing(JoinPoint joinPoint, Exception ex) {
+        log.info("[AfterThrowing] {}, message = {}", joinPoint.getSignature(), ex);
+    }
+
+    @After(value = "hello.aop.order.aop.Pointcuts.serviceMethodsInOrderDomain()")
+    public void doAfter(JoinPoint joinPoint) {
+        log.info("[After] {}", joinPoint.getSignature());
     }
 
 }

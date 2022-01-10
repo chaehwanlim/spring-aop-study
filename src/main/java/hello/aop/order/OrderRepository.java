@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderRepository {
 
-    public void save(String itemId) {
+    public String save(String itemId) {
         log.info("[orderRepository] 실행");
         // 저장 로직
         if (itemId.equals("ex")) {
@@ -15,6 +15,8 @@ public class OrderRepository {
         }
 
         sleep(1000);
+
+        return "saved";
     }
 
     private void sleep(int millisec) {

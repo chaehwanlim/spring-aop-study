@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @SpringBootTest
-@Import({AspectV5Order.LogAspect.class, AspectV5Order.TransactionAspect.class})
+@Import({AspectV5Order.class, AspectV5Order.LogAspect.class, AspectV5Order.TransactionAspect.class})
 public class AopTest {
 
     @Autowired
